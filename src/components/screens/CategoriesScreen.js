@@ -2,11 +2,21 @@ import { FlatList } from "react-native";
 import { CATEGORIES } from "../../fakeData/fakeData";
 import CategoryGreedTile from "../globals/CategoryGreedTile/CategoryGreedTile";
 
-function renderCatItem(item) {
-  return <CategoryGreedTile title={item.title} color={item.color} />;
-}
+function CategoriesScreen({ navigation }) {
+  function renderCatItem(item) {
+    const onPressHandler = () => {
+      navigation.navigate("MealsOverview", { categoryId: item.id });
+    };
 
-function CategoriesScreen() {
+    return (
+      <CategoryGreedTile
+        title={item.title}
+        color={item.color}
+        onPress={onPressHandler}
+      />
+    );
+  }
+
   return (
     <FlatList
       data={CATEGORIES}
