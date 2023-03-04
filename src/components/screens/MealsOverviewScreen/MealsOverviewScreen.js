@@ -23,7 +23,7 @@ export default function MealsOverviewScreen({ route, navigation }) {
       <FlatList
         data={displayedMeal}
         keyExtractor={({ id }) => id}
-        renderItem={({ item }) => <MealItem meal={item} />}
+        renderItem={({ item }) => <MealItem mealId={item.id} />}
       />
     </View>
   );

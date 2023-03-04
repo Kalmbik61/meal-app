@@ -2,17 +2,21 @@ import { Text, View, Pressable, Image } from "react-native";
 import styles from "./MealItem.styles";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import MealDetails from "../../../globals/MealDetails/MealDetails";
+import { MEALS } from "../../../../fakeData/fakeData";
 
-export default function MealItem({ meal }) {
+export default function MealItem({ mealId }) {
   const [imgError, setImgError] = useState(false);
 
   const navigation = useNavigation();
 
   const toMealDetail = () => {
     navigation.navigate("MealDetail", {
-      meal,
+      mealId,
     });
   };
+
+  const meal = MEALS.find((m) => m.id === mealId);
 
   return (
     <View style={styles.container}>
@@ -30,15 +34,11 @@ export default function MealItem({ meal }) {
             />
             <Text style={styles.title}>{meal.title}</Text>
           </View>
-          <View style={styles.meal_info}>
-            <Text style={styles.meal_info__item}>{meal.duration}m</Text>
-            <Text style={styles.meal_info__item}>
-              {meal.complexity.toUpperCase()}
-            </Text>
-            <Text style={styles.meal_info__item}>
-              {meal.affordability.toUpperCase()}
-            </Text>
-          </View>
+          <MealDetails
+            duration={meal.duration}
+            complexity={meal.complexity}
+            affordability={meal.affordability}
+          />
         </View>
       </Pressable>
     </View>
